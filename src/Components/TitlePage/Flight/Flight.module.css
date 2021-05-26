@@ -1,0 +1,50 @@
+.ticket {
+    border: solid red 1px;
+    width: 800px;
+}
+
+.line {
+    height: 2px;
+    width: 100%;
+    background-color: #0083c3;
+}
+
+.ticket button {
+    width: 100%;
+    height: 40px;
+    background-color: #ffb168;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.ticket button:hover {
+    background-color: #ffd2a8;
+}
+
+.ticket button:active {
+    background-color: #fda14b;
+}
+
+.header {
+    background-color: #0087c9;
+    color: white;
+    height: 43px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header img {
+    /* width: 93px; */
+    height: 100%;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.text p {
+    margin: 0;
+}

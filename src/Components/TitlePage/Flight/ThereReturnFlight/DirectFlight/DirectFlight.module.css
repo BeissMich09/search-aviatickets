@@ -1,0 +1,33 @@
+.direct_flight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.city {
+    display: flex;
+}
+
+.line_flight {
+    background-color: #a2a2a2;
+    height: 1px;
+    width: 80%;
+    align-items: center;
+}
+
+.underline {
+    background-color: #e5e5e5;
+    height: 2px;
+    width: 80%;
+}
+
+.date_flight {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.date_flight p {
+    margin: 0;
+}

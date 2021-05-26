@@ -1,0 +1,44 @@
+.there {
+    display: flex;
+    flex-direction: column;
+}
+
+.way {
+    display: flex;
+}
+
+.line {
+    background-color: #e5e5e5;
+    height: 2px;
+    width: 80%;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+}
+
+.date_flight {
+    display: flex;
+    justify-content: space-around;
+}
+
+.transfer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transfer_line {
+    height: 1px;
+    width: 30%;
+    background-color: #a2a2a2;
+}
+
+.date p {
+    margin: 0;
+}
+
+.time_duration {
+    display: flex;
+}
