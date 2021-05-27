@@ -1,0 +1,10 @@
+.radios,
+.checkboxes {
+    display: flex;
+    flex-direction: column;
+}
+
+.radios label,
+.checkboxes label {
+    cursor: pointer;
+}

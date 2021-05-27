@@ -22,14 +22,16 @@ class TitlePageContainer extends React.Component {
     ) {
       return <div>Идет загрузка...</div>;
     } else {
-      return <TitlePage data={this.props.data} />;
+      return (
+        <TitlePage sortData={this.props.sortData} data={this.props.data} />
+      );
     }
   }
 }
 let mapStateToProps = (state) => {
-  console.log(state);
   return {
     data: state.dataReducer.data,
+    sortData: state.dataReducer.sortData,
   };
 };
 export default connect(mapStateToProps, { getData })(TitlePageContainer);

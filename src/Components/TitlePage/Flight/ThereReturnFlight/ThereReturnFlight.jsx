@@ -5,8 +5,6 @@ import Transfer from "./Transfer/Transfer";
 import DirectFlight from "./DirectFlight/DirectFlight";
 
 const ThereReturnFlight = ({ item, getTimeFromMins }) => {
-  console.log(item.segments.length === 1 ? null : item);
-
   return (
     <div>
       {item.segments.length === 1 ? (
