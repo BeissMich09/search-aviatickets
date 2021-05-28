@@ -5,6 +5,7 @@ import {
   getSortArr,
   setFilterDirect,
   setFilterTransfer,
+  setValuesFilterPrice,
 } from "../../redux/data-reducer";
 import FilterSearch from "./FilterSearch";
 
@@ -49,12 +50,10 @@ class FilterSearchContainer extends React.Component {
     let filterTickets;
     if (direct === true && transfer === false) {
       filterTickets = this.props.data.filter((item) => {
-        console.log(item.flight.legs[0].segments.length === 1);
         return item.flight.legs[0].segments.length === 1;
       });
     } else if (direct === false && transfer === true) {
       return (filterTickets = this.props.data.filter((item) => {
-        console.log(item.flight.legs[0].segments.length === 2);
         return item.flight.legs[0].segments.length === 2;
       }));
     } else if (direct && transfer) {
@@ -62,6 +61,21 @@ class FilterSearchContainer extends React.Component {
     }
     console.log(filterTickets);
     return filterTickets;
+  };
+
+  filterPrice = (array, from, before) => {
+    let ticketsFilterPrice;
+    ticketsFilterPrice = array.filter((item) => {
+      console.log(
+        +item.flight.price.total.amount >= +from &&
+          +item.flight.price.total.amount <= +before
+      );
+      return (
+        +item.flight.price.total.amount >= +from &&
+        +item.flight.price.total.amount <= +before
+      );
+    });
+    return ticketsFilterPrice;
   };
 
   render() {
@@ -77,6 +91,9 @@ class FilterSearchContainer extends React.Component {
         setFilterTransfer={this.props.setFilterTransfer}
         filterArrayTickets={this.filterArrayTickets}
         sortData={this.props.sortData}
+        setValuesFilterPrice={this.props.setValuesFilterPrice}
+        filterPriceValue={this.props.filterPriceValue}
+        filterPrice={this.filterPrice}
       />
     );
   }
@@ -89,6 +106,7 @@ const mapStateToProps = (state) => {
     data: state.dataReducer.data,
     sortData: state.dataReducer.sortData,
     filter: state.dataReducer.filter,
+    filterPriceValue: state.dataReducer.filterPriceValue,
   };
 };
 export default connect(mapStateToProps, {
@@ -96,4 +114,5 @@ export default connect(mapStateToProps, {
   getSortArr,
   setFilterDirect,
   setFilterTransfer,
+  setValuesFilterPrice,
 })(FilterSearchContainer);

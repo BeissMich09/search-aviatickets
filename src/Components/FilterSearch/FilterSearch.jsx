@@ -2,6 +2,7 @@ import React from "react";
 import style from "./FilterSearch.module.css";
 
 const FilterSearch = ({
+  getData,
   value,
   sortArray,
   filter,
@@ -11,6 +12,9 @@ const FilterSearch = ({
   setFilterTransfer,
   filterArrayTickets,
   sortData,
+  filterPriceValue,
+  setValuesFilterPrice,
+  filterPrice,
 }) => {
   console.log(filter);
   return (
@@ -24,7 +28,7 @@ const FilterSearch = ({
               name="sort"
               value="1"
               checked={+value === 1 ? true : false}
-              onChange={(e) => {
+              onChange={() => {
                 getSortArr(
                   sortArray(
                     sortData === undefined || sortData.length === 0
@@ -44,7 +48,7 @@ const FilterSearch = ({
               checked={+value === 2 ? true : false}
               type="radio"
               name="sort"
-              onChange={(e) => {
+              onChange={() => {
                 getSortArr(
                   sortArray(
                     sortData === undefined || sortData.length === 0
@@ -64,7 +68,7 @@ const FilterSearch = ({
               checked={+value === 3 ? true : false}
               type="radio"
               name="sort"
-              onChange={(e) => {
+              onChange={() => {
                 getSortArr(
                   sortArray(
                     sortData === undefined || sortData.length === 0
@@ -115,10 +119,35 @@ const FilterSearch = ({
         <h6>Цена</h6>
         <div>
           <p>
-            От <input type="text" />
+            От
+            <input
+              type="text"
+              onChange={(e) => {
+                setValuesFilterPrice("from", e.target.value);
+              }}
+              value={filterPriceValue.from}
+            />
           </p>
           <p>
-            До <input type="text" />
+            До{" "}
+            <input
+              type="text"
+              onChange={(e) => {
+                setValuesFilterPrice("before", e.target.value);
+              }}
+              value={filterPriceValue.before}
+              onBlur={() => {
+                getSortArr(
+                  filterPrice(
+                    sortData === undefined || sortData.length === 0
+                      ? data
+                      : sortData,
+                    filterPriceValue.from,
+                    filterPriceValue.before
+                  )
+                );
+              }}
+            />
           </p>
         </div>
       </div>

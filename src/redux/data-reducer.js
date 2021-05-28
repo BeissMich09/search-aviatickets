@@ -2,12 +2,14 @@ const GET_DATA = "GET_DATA";
 const GET_SORT_ARRAY = "GET_SORT_ARRAY";
 const SET_VALUE_DIRECT = "SET_VALUE_DIRECT";
 const SET_VALUE_TRANSFER = "SET_VALUE_TRANSFER";
+const SET_VALUES_FILTER_PRICE = "SET_VALUES_FILTER_PRICE";
 
 let initialeState = {
   data: [],
   value: false,
   sortData: [],
   filter: { direct: false, transfer: false },
+  filterPriceValue: { from: "", before: "" },
 };
 
 const dataReducer = (state = initialeState, action) => {
@@ -35,6 +37,15 @@ const dataReducer = (state = initialeState, action) => {
         ...state,
         filter: { ...state.filter, transfer: action.value },
         sortData: action.array,
+      };
+    case SET_VALUES_FILTER_PRICE:
+      return {
+        ...state,
+        filterPriceValue: {
+          ...state.filterPriceValue,
+          [action.name]: action.value,
+        },
+        // sortData: action.array,
       };
     default:
       return {
@@ -67,6 +78,14 @@ export const getSortArr = (array, value) => {
   return {
     type: GET_SORT_ARRAY,
     array,
+    value,
+  };
+};
+
+export const setValuesFilterPrice = (name, value) => {
+  return {
+    type: SET_VALUES_FILTER_PRICE,
+    name,
     value,
   };
 };
