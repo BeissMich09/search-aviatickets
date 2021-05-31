@@ -1,8 +1,8 @@
 import React from "react";
+import AirlineContainer from "./Airline/AirlineContainer";
 import style from "./FilterSearch.module.css";
 
 const FilterSearch = ({
-  getData,
   value,
   sortArray,
   filter,
@@ -15,10 +15,24 @@ const FilterSearch = ({
   filterPriceValue,
   setValuesFilterPrice,
   filterPrice,
+  arrayAirlines,
+  setArrayAirlinesTickets,
+  arrayAirlinesTickets,
+  setChangeArrayAirlinesTickets,
 }) => {
-  console.log(filter);
+  const airlineName = arrayAirlines.map((name, index) => (
+    <AirlineContainer
+      arrayAirlinesTickets={arrayAirlinesTickets}
+      setArrayAirlinesTickets={setArrayAirlinesTickets}
+      setChangeArrayAirlinesTickets={setChangeArrayAirlinesTickets}
+      sortData={sortData}
+      key={index}
+      name={name}
+      data={data}
+    />
+  ));
   return (
-    <div>
+    <div className={style.filter_search}>
       <div>
         <h6>Сортировать</h6>
         <div className={style.radios}>
@@ -153,14 +167,7 @@ const FilterSearch = ({
       </div>
       <div>
         <h6>Авиакомпании</h6>
-        <div>
-          <p>
-            <input type="checkbox" /> - Имя компании
-          </p>
-          <p>
-            <input type="checkbox" /> - Имя компании
-          </p>
-        </div>
+        <div className={style.airlines_name}>{airlineName}</div>
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
 .direct_flight {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    height: 140px;
 }
 
 .city {
@@ -30,4 +31,22 @@
 
 .date_flight p {
     margin: 0;
+}
+
+.airline_name {
+    align-self: flex-start;
+}
+
+.arrival,
+.departure {
+    display: flex;
+}
+
+.arrival p,
+.departure p {
+    margin: 0;
+}
+
+.blue {
+    color: #0087c9;
 }

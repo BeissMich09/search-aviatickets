@@ -1,10 +1,16 @@
 .radios,
-.checkboxes {
+.checkboxes,
+.airlines_name {
     display: flex;
     flex-direction: column;
 }
 
 .radios label,
-.checkboxes label {
+.checkboxes label,
+.airlines_name label {
     cursor: pointer;
+}
+
+.filter_search h6 {
+    font-size: 13px;
 }

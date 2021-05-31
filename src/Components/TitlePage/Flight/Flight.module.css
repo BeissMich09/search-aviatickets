@@ -1,6 +1,6 @@
 .ticket {
-    border: solid red 1px;
     width: 800px;
+    padding: 10px;
 }
 
 .line {
@@ -35,7 +35,6 @@
 }
 
 .header img {
-    /* width: 93px; */
     height: 100%;
 }
 

@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import {
   getData,
   getSortArr,
+  setArrayAirlines,
+  setArrayAirlinesTickets,
+  setChangeArrayAirlinesTickets,
   setFilterDirect,
   setFilterTransfer,
   setValuesFilterPrice,
@@ -11,9 +14,9 @@ import FilterSearch from "./FilterSearch";
 
 class FilterSearchContainer extends React.Component {
   sortArray = (array, value) => {
-    let a;
+    let newArrayTickets;
     if (value === 2) {
-      a = array.slice().sort(function (a, b) {
+      newArrayTickets = array.slice().sort(function (a, b) {
         if (+a.flight.price.total.amount > +b.flight.price.total.amount)
           return -1;
         if (+a.flight.price.total.amount < +b.flight.price.total.amount)
@@ -21,7 +24,7 @@ class FilterSearchContainer extends React.Component {
         return 0;
       });
     } else if (value === 1) {
-      a = array.slice().sort(function (a, b) {
+      newArrayTickets = array.slice().sort(function (a, b) {
         if (+a.flight.price.total.amount > +b.flight.price.total.amount)
           return 1;
         if (+a.flight.price.total.amount < +b.flight.price.total.amount)
@@ -29,7 +32,7 @@ class FilterSearchContainer extends React.Component {
         return 0;
       });
     } else if (value === 3) {
-      a = array.slice().sort(function (a, b) {
+      newArrayTickets = array.slice().sort(function (a, b) {
         if (
           a.flight.legs[0].duration + a.flight.legs[1].duration >
           b.flight.legs[0].duration + b.flight.legs[1].duration
@@ -43,33 +46,36 @@ class FilterSearchContainer extends React.Component {
         return 0;
       });
     }
-    return a;
+    return newArrayTickets;
   };
 
   filterArrayTickets = (direct, transfer) => {
     let filterTickets;
+    const array =
+      this.props.sortData === undefined ||
+      this.props.sortData.length === 0 ||
+      typeof this.props.sortData.length === typeof ""
+        ? this.props.data
+        : this.props.sortData;
     if (direct === true && transfer === false) {
-      filterTickets = this.props.data.filter((item) => {
+      filterTickets = array.filter((item) => {
         return item.flight.legs[0].segments.length === 1;
       });
     } else if (direct === false && transfer === true) {
-      return (filterTickets = this.props.data.filter((item) => {
+      return (filterTickets = array.filter((item) => {
         return item.flight.legs[0].segments.length === 2;
       }));
-    } else if (direct && transfer) {
-      filterTickets = this.props.data;
+    } else if ((direct && transfer) || direct === transfer) {
+      filterTickets = array;
     }
-    console.log(filterTickets);
-    return filterTickets;
+    return filterTickets === undefined || filterTickets.length === 0
+      ? "По такому запросу нет билетов!"
+      : filterTickets;
   };
 
   filterPrice = (array, from, before) => {
     let ticketsFilterPrice;
     ticketsFilterPrice = array.filter((item) => {
-      console.log(
-        +item.flight.price.total.amount >= +from &&
-          +item.flight.price.total.amount <= +before
-      );
       return (
         +item.flight.price.total.amount >= +from &&
         +item.flight.price.total.amount <= +before
@@ -94,19 +100,23 @@ class FilterSearchContainer extends React.Component {
         setValuesFilterPrice={this.props.setValuesFilterPrice}
         filterPriceValue={this.props.filterPriceValue}
         filterPrice={this.filterPrice}
+        arrayAirlines={this.props.arrayAirlines}
+        setArrayAirlinesTickets={this.props.setArrayAirlinesTickets}
+        arrayAirlinesTickets={this.props.arrayAirlinesTickets}
+        setChangeArrayAirlinesTickets={this.props.setChangeArrayAirlinesTickets}
       />
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     value: state.dataReducer.value,
     data: state.dataReducer.data,
     sortData: state.dataReducer.sortData,
     filter: state.dataReducer.filter,
     filterPriceValue: state.dataReducer.filterPriceValue,
+    arrayAirlines: state.dataReducer.arrayAirlines,
   };
 };
 export default connect(mapStateToProps, {
@@ -115,4 +125,7 @@ export default connect(mapStateToProps, {
   setFilterDirect,
   setFilterTransfer,
   setValuesFilterPrice,
+  setArrayAirlines,
+  setChangeArrayAirlinesTickets,
+  setArrayAirlinesTickets,
 })(FilterSearchContainer);

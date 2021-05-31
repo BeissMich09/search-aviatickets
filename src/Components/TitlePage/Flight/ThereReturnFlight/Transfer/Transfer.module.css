@@ -1,8 +1,9 @@
 .transfer {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    height: 140px;
 }
 
 .city {
@@ -45,6 +46,30 @@
 .transfer_line_container {
     display: flex;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+}
+
+.airline_name {
+    align-self: flex-start;
+}
+
+.transfer_line_container p {
+    color: #ff8e1d;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.blue {
+    color: #0087c9;
+}
+
+.arrival,
+.departure {
+    display: flex;
+}
+
+.arrival p,
+.departure p {
+    margin: 0;
 }

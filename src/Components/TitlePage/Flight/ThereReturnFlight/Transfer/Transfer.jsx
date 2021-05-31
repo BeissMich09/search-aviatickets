@@ -13,16 +13,16 @@ const Transfer = ({ stepFirst, stepSecond, getTimeFromMins, duration }) => {
           {stepFirst.departureCity === undefined
             ? stepFirst.departureAirport.caption
             : stepFirst.departureCity.caption}
-          , {stepFirst.departureAirport.caption} (
-          {stepFirst.departureAirport.uid})
+          , {stepFirst.departureAirport.caption}{" "}
+          <p className={style.blue}>({stepFirst.departureAirport.uid})</p>
         </div>
-        <div>→</div>
+        <div className={style.blue}>→</div>
         <div className={style.arrival}>
           {stepSecond.arrivalCity === undefined
             ? stepSecond.arrivalAirport.caption
             : stepSecond.arrivalCity.caption}
-          , {stepSecond.arrivalAirport.caption} ({stepSecond.arrivalAirport.uid}
-          )
+          , {stepSecond.arrivalAirport.caption}{" "}
+          <p className={style.blue}>({stepSecond.arrivalAirport.uid})</p>
         </div>
       </div>
       <div className={style.underline}></div>
@@ -33,10 +33,12 @@ const Transfer = ({ stepFirst, stepSecond, getTimeFromMins, duration }) => {
       </div>
       <div className={style.transfer_line_container}>
         <div className={style.line_transfer}></div>
-        <p>пересадка</p>
+        <p>1 пересадка</p>
         <div className={style.line_transfer}></div>
       </div>
-      <div>Рейс выполняет: {stepFirst.airline.caption}</div>
+      <div className={style.airline_name}>
+        Рейс выполняет: {stepFirst.airline.caption}
+      </div>
     </div>
   );
 };

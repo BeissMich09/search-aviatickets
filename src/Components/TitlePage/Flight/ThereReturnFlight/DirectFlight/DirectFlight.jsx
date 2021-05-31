@@ -14,12 +14,13 @@ const DirectFlight = ({ item, getTimeFromMins, duration }) => {
           {item.departureCity === undefined
             ? item.departureAirport.caption
             : item.departureCity.caption}
-          , {item.departureAirport.caption} ({item.departureAirport.uid})
+          , {item.departureAirport.caption}{" "}
+          <p className={style.blue}>({item.departureAirport.uid})</p>
         </div>
-        <div>→</div>
+        <div className={style.blue}>→</div>
         <div className={style.arrival}>
-          {item.arrivalCity.caption}, {item.arrivalAirport.caption} (
-          {item.arrivalAirport.uid})
+          {item.arrivalCity.caption}, {item.arrivalAirport.caption}{" "}
+          <p className={style.blue}>({item.arrivalAirport.uid})</p>
         </div>
       </div>
       <div className={style.underline}></div>
@@ -29,7 +30,9 @@ const DirectFlight = ({ item, getTimeFromMins, duration }) => {
         <p>{dateArrival.format("llll")}</p>
       </div>
       <div className={style.line_flight}></div>
-      <div>Рейс выполняет: {item.airline.caption}</div>
+      <div className={style.airline_name}>
+        Рейс выполняет: {item.airline.caption}
+      </div>
     </div>
   );
 };

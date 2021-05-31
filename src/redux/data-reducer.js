@@ -3,6 +3,10 @@ const GET_SORT_ARRAY = "GET_SORT_ARRAY";
 const SET_VALUE_DIRECT = "SET_VALUE_DIRECT";
 const SET_VALUE_TRANSFER = "SET_VALUE_TRANSFER";
 const SET_VALUES_FILTER_PRICE = "SET_VALUES_FILTER_PRICE";
+const SET_ARRAY_AIRLINES = "SET_ARRAY_AIRLINES";
+const SET_AIRLINE_FILTER_TICKETS = "SET_AIRLINE_FILTER_TICKETS";
+const SET_AIRLINE_CHANGE_FILTER_TICKETS = "SET_AIRLINE_CHANGE_FILTER_TICKETS";
+const CLEARE = "CLEARE";
 
 let initialeState = {
   data: [],
@@ -10,6 +14,7 @@ let initialeState = {
   sortData: [],
   filter: { direct: false, transfer: false },
   filterPriceValue: { from: "", before: "" },
+  arrayAirlines: [],
 };
 
 const dataReducer = (state = initialeState, action) => {
@@ -45,8 +50,33 @@ const dataReducer = (state = initialeState, action) => {
           ...state.filterPriceValue,
           [action.name]: action.value,
         },
-        // sortData: action.array,
       };
+    case SET_ARRAY_AIRLINES:
+      return {
+        ...state,
+        arrayAirlines: action.arrayAirlines,
+      };
+
+    case SET_AIRLINE_FILTER_TICKETS:
+      let newArr = state.sortData.concat(action.arrayTickets);
+      return {
+        ...state,
+        sortData: newArr,
+      };
+    case SET_AIRLINE_CHANGE_FILTER_TICKETS:
+      return {
+        ...state,
+        sortData: action.arrayTickets,
+      };
+    case CLEARE:
+      return {
+        ...state,
+        value: false,
+        sortData: [],
+        filter: { direct: false, transfer: false },
+        filterPriceValue: { from: "", before: "" },
+      };
+
     default:
       return {
         ...state,
@@ -88,6 +118,29 @@ export const setValuesFilterPrice = (name, value) => {
     name,
     value,
   };
+};
+export const setArrayAirlines = (arrayAirlines) => {
+  return {
+    type: SET_ARRAY_AIRLINES,
+    arrayAirlines,
+  };
+};
+
+export const setArrayAirlinesTickets = (arrayTickets) => {
+  return {
+    type: SET_AIRLINE_FILTER_TICKETS,
+    arrayTickets,
+  };
+};
+export const setChangeArrayAirlinesTickets = (arrayTickets) => {
+  return {
+    type: SET_AIRLINE_CHANGE_FILTER_TICKETS,
+    arrayTickets,
+  };
+};
+
+export const cleare = () => {
+  return { type: CLEARE };
 };
 
 export default dataReducer;
